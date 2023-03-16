@@ -124,7 +124,31 @@ public class Stepdefinition {
         public void database_baglantisi_kapatilir() {
                 closeConnection();
         }
+        //°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 
+        @Given("{string} degeri verilen customerin {string} güncellenir.")
+        public void degeri_verilen_customerin_güncellenir(String id, String adres) throws SQLException {
+                String query= "UPDATE u480337000_tlb_training.customer_addresses\n" +
+                        "SET address= '"+adres+"' WHERE id="+id;
+              /*
+              UPDATE u480337000_tlb_training.customer_addresses
+                SET address= 'kadiköy' WHERE id=1
+               */
+                System.out.println(query);
+
+                update(query);
+
+        }
+        @Given("customer address tablosundaki {string} bilgileri listelenir.")
+        public void customer_address_tablosundaki_bilgileri_listelenir(String columnName) {
+
+                getColumnData()
+
+        }
+        @Given("customerin {string} guncellendigi dogrulanir.")
+        public void customerin_guncellendigi_dogrulanir(String string) {
+
+        }
 
 
 }
