@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<testsuite errors="0" failures="0" name="io.cucumber.core.plugin.JUnitFormatter" skipped="0" tests="1" time="1.208">
-    <testcase classname="JDBC baglantisi üzerinden update sorgusu yapma" name="_2" time="1.064">
+<testsuite errors="0" failures="0" name="io.cucumber.core.plugin.JUnitFormatter" skipped="0" tests="1" time="1.271">
+    <testcase classname="User datalarini test etme" name="Verilen datalar ile user bilgilerini dogrulama" time="1.121">
         <system-out>
             <![CDATA[* Database baglantisi kurulur...............................................passed
-* "1" degeri verilen customerin "kadiköy" güncellenir.......................passed
-* customer address tablosundaki "address" bilgileri listelenir..............passed
-* customerin "kadiköy" guncellendigi dogrulanir.............................passed
+* Verilen datalar ile query hazirlanip sorgu gerceklestirilir...............passed
+* Dönen Result set datasi dogrulanir........................................passed
 * Database baglantisi kapatilir.............................................passed
 ]]>
         </system-out>

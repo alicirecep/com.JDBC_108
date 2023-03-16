@@ -41,6 +41,7 @@ public class Stepdefinition {
         ResultSet resultset;
 
         List<Object> staffID= new ArrayList<>();
+        List<Object> adresList= new ArrayList<>();
 
 
         @Given("Database ile iletisimi baslat")
@@ -128,8 +129,8 @@ public class Stepdefinition {
 
         @Given("{string} degeri verilen customerin {string} güncellenir.")
         public void degeri_verilen_customerin_güncellenir(String id, String adres) throws SQLException {
-                String query= "UPDATE u480337000_tlb_training.customer_addresses\n" +
-                        "SET address= '"+adres+"' WHERE id="+id;
+                String query= "UPDATE u480337000_tlb_training.customer_addresses SET address= '"+adres+"' WHERE id="+id;
+
               /*
               UPDATE u480337000_tlb_training.customer_addresses
                 SET address= 'kadiköy' WHERE id=1
@@ -141,12 +142,32 @@ public class Stepdefinition {
         }
         @Given("customer address tablosundaki {string} bilgileri listelenir.")
         public void customer_address_tablosundaki_bilgileri_listelenir(String columnName) {
-
-                getColumnData()
+                String query= "SELECT * FROM u480337000_tlb_training.customer_addresses;";
+                 adresList = getColumnData(query, columnName);
+                System.out.println(adresList);
 
         }
         @Given("customerin {string} guncellendigi dogrulanir.")
-        public void customerin_guncellendigi_dogrulanir(String string) {
+        public void customerin_guncellendigi_dogrulanir(String güncelleneneAdres) {
+                assertTrue(adresList.toString().contains(güncelleneneAdres));
+        }
+        @Given("Verilen datalar ile query hazirlanip sorgu gerceklestirilir.")
+        public void verilen_datalar_ile_query_hazirlanip_sorgu_gerceklestirilir() throws SQLException {
+
+                String query = "SELECT email FROM u480337000_tlb_training.users WHERE first_name='admin' and last_name='user';";
+
+               resultset = getStatement().executeQuery(query);
+        }
+        @Given("Dönen Result set datasi dogrulanir")
+        public void dönen_result_set_datasi_dogrulanir() throws SQLException {
+
+                resultset.first();
+                String actualEmailData= resultset.getString("email");
+                String expectedEmailData= "admin@gmail.com";
+                assertEquals(expectedEmailData,actualEmailData);
+
+                System.out.println(resultset.getString("email"));
+
 
         }
 

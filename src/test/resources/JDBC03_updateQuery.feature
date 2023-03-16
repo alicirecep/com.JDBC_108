@@ -15,4 +15,4 @@ Feature: JDBC baglantisi üzerinden update sorgusu yapma
 
     Examples:
     |id|adresi|
-    |1|kadiköy|
+    |1|Yozgat|
