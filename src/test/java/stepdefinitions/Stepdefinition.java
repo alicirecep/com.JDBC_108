@@ -6,8 +6,11 @@ import org.junit.Assert;
 
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.*;
+import static utilities.DBUtils.*;
 
 
 public class Stepdefinition {
@@ -36,6 +39,8 @@ public class Stepdefinition {
         Connection connection;
         Statement statement;
         ResultSet resultset;
+
+        List<Object> staffID= new ArrayList<>();
 
 
         @Given("Database ile iletisimi baslat")
@@ -73,7 +78,7 @@ public class Stepdefinition {
                 System.out.println(resultset.getString("first_name"));
 
                 resultset.absolute(11);
-                System.out.println(resultset.getString("first_name"));
+                System.out.println(resultset.getString("first_name"));//Arif
 
                 System.out.println("°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°");
 
@@ -85,14 +90,41 @@ public class Stepdefinition {
                         sira++;
                 }
 
-                resultset.absolute(11);
+                resultset.absolute(7);
                 System.out.println(resultset.getString("email"));
+                System.out.println(resultset.getString("phone"));
+                System.out.println(resultset.getString("username"));
+                System.out.println(resultset.getString("password"));
+
+
 
         }
         @Then("Database kapatilir")
         public void database_kapatilir() throws SQLException {
                 connection.close();
         }
+
+//°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
+
+        @Given("Database baglantisi kurulur.")
+        public void database_baglantisi_kurulur() {
+                createConnection();
+        }
+        @Given("Staff tablosundaki {string} leri listelenir.")
+        public void staff_tablosundaki_leri_listelenir(String id) {
+                staffID = getColumnData("SELECT * FROM u480337000_tlb_training.staff",id);
+                System.out.println(staffID);
+        }
+        @Given("Verilen {string} dogrulanir.")
+        public void verilen_dogrulanir(String verilenId) {
+
+                assertTrue(staffID.toString().contains(verilenId));
+        }
+        @Given("Database baglantisi kapatilir.")
+        public void database_baglantisi_kapatilir() {
+                closeConnection();
+        }
+
 
 
 }
